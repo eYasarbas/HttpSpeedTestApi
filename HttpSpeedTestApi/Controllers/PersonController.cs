@@ -22,7 +22,7 @@ namespace HttpSpeedTestApi.Controllers
                 .RuleFor(p => p.Age, f => f.Random.Int(18, 80))
                 .RuleFor(p => p.Email, f => f.Internet.Email());
 
-            People = personFaker.Generate(50);  // 50 adet mock kişi oluştur
+            People = personFaker.Generate(500000);  
         }
 
         [HttpGet]
@@ -45,7 +45,7 @@ namespace HttpSpeedTestApi.Controllers
         [HttpPost]
         public ActionResult<Person> Post([FromBody] Person newPerson)
         {
-            newPerson.Id = People.Count + 1;
+            //newPerson.Id = People.Count + 1;
             People.Add(newPerson);
             return CreatedAtAction(nameof(Get), new { id = newPerson.Id }, newPerson);
         }
